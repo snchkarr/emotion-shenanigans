@@ -1,0 +1,11 @@
+vk-api
+python-dotenv
+chromadb
+sentence-transformers
+langchain
+langchain-openai
+openai
+torch
+transformers
+tf-keras
+numpy
