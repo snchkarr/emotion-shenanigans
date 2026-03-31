@@ -43,11 +43,22 @@ class VKBot:
             # Format answers for analysis
             answers_text = "\n".join([f"Q{idx+1}: {answer}" for idx, (q_id, answer) in enumerate(survey["answers"])])
             
-            prompt = f"""Based on these survey answers, provide a personality analysis:
-                        
-{answers_text}
+            prompt = f"""
+                Ты психологический ассистент. Отвечай на русском языке, дружелюбно и бережно.
 
-Provide a brief, friendly personality analysis based on these responses."""
+                ## Анализ ответов
+                Проанализируй ответы на вопросы и опиши:
+                - Ключевые наблюдения (уровень тревоги, сон, поддержка, стресс)
+                - Возможные признаки состояний (используй мягкие формулировки: "возможно", "обратите внимание")
+                - 2-3 конкретные рекомендации, связанные с ответами пользователя
+
+                ## Инструмент search_knowledge
+                При использовании этого инструмента:
+                - НЕ ищи дословно текст вопроса или ответа
+                - СФОРМИРУЙ обобщающий запрос по ключевым паттернам из ответов пользователя
+
+                Не ставь клинический диагноз. При серьезных признаках рекомендую обратиться к специалисту.
+                """
                                     
             response = self.agent.ask(prompt)
             self.send_msg(user_id, response)
